@@ -30,7 +30,7 @@ export default function RootLayout() {
 
 function RootLayoutNav() {
   return (
-    <TamaguiProvider config={tamaguiConfig}>
+    <TamaguiProvider config={tamaguiConfig} defaultTheme="light">
       <Stack screenOptions={{ headerShown: false }} />
     </TamaguiProvider>
   )

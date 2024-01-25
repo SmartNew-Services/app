@@ -1,19 +1,54 @@
-import { TamaguiProvider, createTamagui } from 'tamagui'
+import { radius, size, space, zIndex } from '@tamagui/themes'
+import { createTamagui, createTokens } from 'tamagui'
+import { config as TConfig } from '@tamagui/config'
 
-// some nice defaults:
-import { config } from '@tamagui/config/v2'
-
-// you usually export this from a tamagui.config.ts file:
-// this can be as simple as an empty object
-const tamaguiConfig = createTamagui({
-  ...config,
+const tokens = createTokens({
+  size,
+  space,
+  zIndex,
+  radius,
+  color: {
+    purple500: '#8B5CF6',
+    purple200: '#DDD6FE',
+    slate300: '#CBD5E1',
+    red500: '#EF4444',
+    red400: '#F87171 ',
+    green300: '#86EFAC ',
+    green500: '#22C55E  ',
+    green700: '#15803D ',
+    background: '#FFF',
+    black: '#000',
+    text: '#0F172A',
+    textThin: '#475569',
+    textShallow: '#94A3B8',
+  },
 })
 
-// this makes typescript properly type everything based on the config
-type Conf = typeof tamaguiConfig
+const config = createTamagui({
+  ...TConfig,
+  tokens,
+  themes: {
+    light: {
+      purple500: tokens.color.purple500,
+      purple200: tokens.color.purple200,
+      slate300: tokens.color.slate300,
+      red500: tokens.color.red500,
+      red400: tokens.color.red400,
+      green300: tokens.color.green300,
+      green500: tokens.color.green500,
+      green700: tokens.color.green700,
+      background: tokens.color.background,
+      black: tokens.color.black,
+      text: tokens.color.text,
+      textThin: tokens.color.textThin,
+      textShallow: tokens.color.textShallow,
+    },
+  },
+})
+
+export type Conf = typeof config
 declare module 'tamagui' {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
   interface TamaguiCustomConfig extends Conf {}
 }
-
-export default tamaguiConfig
+export default config
