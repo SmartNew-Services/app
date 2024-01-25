@@ -1,26 +1,23 @@
-import FontAwesome from '@expo/vector-icons/FontAwesome'
+import tamaguiConfig from '@/tamagui.config'
 import { useFonts } from 'expo-font'
 import { Stack } from 'expo-router'
 import * as SplashScreen from 'expo-splash-screen'
 import { useEffect } from 'react'
+import { TamaguiProvider } from 'tamagui'
 
 export { ErrorBoundary } from 'expo-router'
 
 SplashScreen.preventAutoHideAsync()
 
 export default function RootLayout() {
-  const [loaded, error] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-    ...FontAwesome.font,
+  const [loaded] = useFonts({
+    Inter: require('@tamagui/font-inter/otf/Inter-Medium.otf'),
+    InterBold: require('@tamagui/font-inter/otf/Inter-Bold.otf'),
   })
 
   useEffect(() => {
-    if (error) throw error
-  }, [error])
-
-  useEffect(() => {
     if (loaded) {
-      SplashScreen.hideAsync()
+      // can hide splash screen here
     }
   }, [loaded])
 
@@ -32,5 +29,9 @@ export default function RootLayout() {
 }
 
 function RootLayoutNav() {
-  return <Stack screenOptions={{ headerShown: false }} />
+  return (
+    <TamaguiProvider config={tamaguiConfig}>
+      <Stack screenOptions={{ headerShown: false }} />
+    </TamaguiProvider>
+  )
 }
