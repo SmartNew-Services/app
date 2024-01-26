@@ -8,16 +8,21 @@ const tokens = createTokens({
   zIndex,
   radius,
   color: {
+    purple100: '#ede9fe',
+    purple300: '#c4b5fd',
     purple200: '#ddd6fe',
     purple400: '#a78bfa',
     purple500: '#8b5cf6',
     purple600: '#7c3aed',
     slate300: '#CBD5E1',
+    slate900: '#0f172a',
     red500: '#EF4444',
-    red400: '#F87171 ',
-    green300: '#86EFAC ',
-    green500: '#22C55E  ',
-    green700: '#15803D ',
+    red600: '#dc2626',
+    red400: '#F87171',
+    green300: '#86EFAC',
+    green500: '#22c55e',
+    green600: '#16a34a',
+    green700: '#15803D',
     background: '#FFF',
     black: '#000',
     white: '#FFF',
@@ -49,10 +54,32 @@ const config = createTamagui({
       textThin: tokens.color.textThin,
       textShallow: tokens.color.textShallow,
     },
-    light_Button: {
+
+    'button-primary': {
       background: tokens.color.purple500,
       backgroundPress: tokens.color.purple600, // darker background on press
       backgroundHover: tokens.color.purple400, // lighter background on hover
+      color: tokens.color.white,
+    },
+
+    'button-secondary': {
+      background: tokens.color.purple200,
+      backgroundPress: tokens.color.purple300, // darker background on press
+      backgroundHover: tokens.color.purple100, // lighter background on hover
+      color: tokens.color.purple500,
+    },
+
+    'button-test': {
+      background: tokens.color.green500,
+      backgroundPress: tokens.color.green600, // darker background on press
+      backgroundHover: tokens.color.green300, // lighter background on hover
+      color: tokens.color.white,
+    },
+
+    'button-red': {
+      background: tokens.color.red500,
+      backgroundPress: tokens.color.red600, // darker background on press
+      // backgroundHover: tokens.color.purple100, // lighter background on hover
       color: tokens.color.white,
     },
   },
