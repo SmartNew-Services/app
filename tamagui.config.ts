@@ -1,5 +1,5 @@
 import { radius, size, space, zIndex } from '@tamagui/themes'
-import { createTamagui, createTokens } from 'tamagui'
+import { createFont, createTamagui, createTokens } from 'tamagui'
 import { config as TConfig } from '@tamagui/config'
 
 const tokens = createTokens({
@@ -29,6 +29,38 @@ const tokens = createTokens({
     text: '#0F172A',
     textThin: '#475569',
     textShallow: '#94A3B8',
+  },
+})
+
+const interFont = createFont({
+  family: 'Inter, sans-serif',
+  size: {
+    1: 12,
+    2: 16,
+    3: 20,
+    4: 24,
+    // ...
+  },
+  lineHeight: {
+    1: 17,
+    2: 22,
+    3: 25,
+    // ...
+  },
+  weight: {
+    4: '300',
+    6: '600',
+  },
+  letterSpacing: {
+    4: 0,
+    8: -1,
+  },
+  // for native only, alternate family based on weight/style
+  face: {
+    // pass in weights as keys
+    700: { normal: 'InterBold', italic: 'InterBold-Italic' },
+    800: { normal: 'InterBold', italic: 'InterBold-Italic' },
+    900: { normal: 'InterBold', italic: 'InterBold-Italic' },
   },
 })
 
@@ -82,6 +114,9 @@ const config = createTamagui({
       // backgroundHover: tokens.color.purple100, // lighter background on hover
       color: tokens.color.white,
     },
+  },
+  fonts: {
+    body: interFont,
   },
 })
 

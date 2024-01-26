@@ -11,8 +11,9 @@ SplashScreen.preventAutoHideAsync()
 
 export default function RootLayout() {
   const [loaded] = useFonts({
-    Inter: require('@tamagui/font-inter/otf/Inter-Medium.otf'),
-    InterBold: require('@tamagui/font-inter/otf/Inter-Bold.otf'),
+    Inter: require('../assets/fonts/Inter/static/Inter-Regular.ttf'),
+    InterSemibold: require('../assets/fonts/Inter/static/Inter-SemiBold.ttf'),
+    InterBold: require('../assets/fonts/Inter/static/Inter-Bold.ttf'),
   })
 
   useEffect(() => {
