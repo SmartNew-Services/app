@@ -1,4 +1,4 @@
-import { Title } from '@/components/Typography'
+import { Title } from '@/src/components/Typography'
 import { router } from 'expo-router'
 import { LucideArrowRight } from 'lucide-react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
