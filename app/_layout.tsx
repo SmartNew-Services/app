@@ -1,3 +1,4 @@
+import { Header } from '@/src/components/Header'
 import tamaguiConfig from '@/tamagui.config'
 import { useFonts } from 'expo-font'
 import { Stack } from 'expo-router'
