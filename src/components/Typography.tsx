@@ -16,6 +16,18 @@ export const Text = styled(TamaguiText, {
   fontSize: '$2',
   fontWeight: 'normal',
   color: '$slate900',
+
+  variants: {
+    test: {
+      oi: {
+        color: '#333',
+      },
+    },
+  },
+
+  defaultVariants: {
+    test: 'oi',
+  },
 })
 export const SmallText = styled(TamaguiText, {
   fontSize: '$1',

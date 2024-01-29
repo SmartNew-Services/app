@@ -1,27 +1,19 @@
-import { useState } from 'react'
 import { Text } from '../Typography'
-import { MonthToggleGroup, MonthToggleItem } from './styles'
+import dayjs from 'dayjs'
+import { FlatList } from 'react-native'
 
 export function MonthToggle() {
-  const [active, setActive] = useState<string>()
-  console.log(active)
+  const months = Array.from({ length: 3 }, (_, index) =>
+    dayjs()
+      .month(dayjs().month() + index)
+      .format('MMMM'),
+  )
+  console.log(months)
 
   return (
-    <MonthToggleGroup
-      type="single"
-      defaultValue="test"
-      value={active}
-      onValueChange={setActive}
-    >
-      <MonthToggleItem value="test">
-        <Text>Test</Text>
-      </MonthToggleItem>
-      <MonthToggleItem value="test2">
-        <Text>Test2</Text>
-      </MonthToggleItem>
-      <MonthToggleItem value="test3">
-        <Text>Test3</Text>
-      </MonthToggleItem>
-    </MonthToggleGroup>
+    <FlatList
+      data={months}
+      renderItem={({ item }) => <Text key={item}>{item}</Text>}
+    />
   )
 }

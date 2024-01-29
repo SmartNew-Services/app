@@ -1,10 +1,11 @@
 import tamaguiConfig from '@/tamagui.config'
+import dayjs from 'dayjs'
 import { useFonts } from 'expo-font'
 import { Stack } from 'expo-router'
 import * as SplashScreen from 'expo-splash-screen'
 import { useEffect } from 'react'
 import { TamaguiProvider } from 'tamagui'
-
+import 'dayjs/locale/pt-br'
 export { ErrorBoundary } from 'expo-router'
 
 SplashScreen.preventAutoHideAsync()
@@ -17,6 +18,7 @@ export default function RootLayout() {
   })
 
   useEffect(() => {
+    dayjs.locale('pt-br')
     if (loaded) {
       // can hide splash screen here
     }

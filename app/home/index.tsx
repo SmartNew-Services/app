@@ -1,8 +1,8 @@
 import { MonthToggle } from '@/src/components/MonthToggle'
 import { TravelCard } from '@/src/components/TravelCard'
-import { Text, Title } from '@/src/components/Typography'
+import { Title } from '@/src/components/Typography'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { ToggleGroup, View } from 'tamagui'
+import { View } from 'tamagui'
 
 export default function HomeScreen() {
   return (
@@ -16,6 +16,7 @@ export default function HomeScreen() {
             date={new Date()}
             description="caminhao munk"
             status="fim"
+            distance="455"
           />
         </View>
       </SafeAreaView>

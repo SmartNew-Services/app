@@ -5,10 +5,10 @@ export const ContainerCard = styled(XStack, {
   gap: '$5',
 
   variants: {
-    type: {
+    variant: {
       solid: {
-        bg: '$slate300',
-        borderRadius: '$2',
+        bg: '$slate100',
+        borderRadius: 8,
       },
 
       transparent: {
@@ -19,6 +19,6 @@ export const ContainerCard = styled(XStack, {
   },
 
   defaultVariants: {
-    type: 'solid',
+    variant: 'solid',
   },
 })
