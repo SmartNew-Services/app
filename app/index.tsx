@@ -17,7 +17,7 @@ export default function AppIndex() {
             </Title>
           </YStack>
           <Button
-            onPress={() => router.push('/home/')}
+            onPress={() => router.replace('/home/')}
             w="100%"
             theme="button-test"
           >

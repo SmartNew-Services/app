@@ -1,3 +1,4 @@
+import { Header } from '@/src/components/Header'
 import tamaguiConfig from '@/tamagui.config'
 import dayjs from 'dayjs'
 import { useFonts } from 'expo-font'
