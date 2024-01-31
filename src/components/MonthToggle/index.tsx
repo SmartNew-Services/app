@@ -1,6 +1,5 @@
-import { Text } from '../Typography'
 import dayjs from 'dayjs'
-import { FlatList, TouchableOpacity } from 'react-native'
+import { FlatList } from 'react-native'
 import { View } from 'tamagui'
 import { MonthToggleItem } from './styles'
 
@@ -15,37 +14,23 @@ export function MonthToggle({ value, onValueChange }: MonthToggleProps) {
       .month(dayjs().month() + index)
       .format('MMMM'),
   )
-  console.log(months)
-
-  function handleChangeMonth(value: string) {
-    console.log(value)
-    onValueChange(value)
-  }
 
   return (
     <View>
-      {/* <FlatList
+      <FlatList
         data={months}
         contentContainerStyle={{ gap: 8 }}
         renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => handleChangeMonth(item)}>
-            <MonthToggleItem key={item} active={item === value}>
-              <Text>{item}</Text>
-            </MonthToggleItem>
-          </TouchableOpacity>
+          <MonthToggleItem
+            key={item}
+            active={item === value}
+            onPress={() => onValueChange(item)}
+          >
+            {item.charAt(0).toUpperCase() + item.slice(1)}
+          </MonthToggleItem>
         )}
         horizontal
-      /> */}
-      {months.map((month) => (
-        <MonthToggleItem
-          key={month}
-          active={month === value}
-          onPress={() => onValueChange(month)}
-        >
-          <Text>{month}</Text>
-        </MonthToggleItem>
-      ))}
-      <Text>{value}</Text>
+      />
     </View>
   )
 }
