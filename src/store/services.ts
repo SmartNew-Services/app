@@ -1,6 +1,6 @@
 import { create } from 'zustand'
-import { db } from '../libs/database'
-import LocationType from '../types/LocationType'
+import db from '../libs/database'
+import { LocationType } from '../types'
 import { calculateDistance } from '../utils/calculateDistance'
 
 type TravelType = {
@@ -22,6 +22,11 @@ type TravelType = {
     time: Date
     location: LocationType
   }[]
+  answeredEquipments: {
+    equipmentId: number
+    distanceTraveled: number
+    time: Date
+  }[]
   distanceTraveled: number
   syncStatus: 'inserted' | 'updated' | 'synced'
 }
@@ -39,6 +44,10 @@ export type ServiceType = {
   distanceTraveled: number
   startLocation: LocationType | null
   travels: TravelType[]
+  listedEquipments: {
+    equipmentId: number
+    answered: boolean
+  }[]
   syncStatus: 'updated' | 'synced'
 }
 
@@ -206,6 +215,7 @@ export const useServices = create<UseServicesData>((set, get) => {
             location,
           },
         ],
+        answeredEquipments: [],
         distanceTraveled: 0,
         status: 'progress',
         syncStatus: 'inserted',

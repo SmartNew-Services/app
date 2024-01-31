@@ -1,4 +1,4 @@
-import LocationType from '../types/LocationType'
+import { LocationType } from '../types'
 
 export function calculateDistance(posX: LocationType, posY: LocationType) {
   const latX = posX.latitude

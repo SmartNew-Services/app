@@ -1,4 +1,4 @@
-export default interface LocationType {
+export interface LocationType {
   latitude: number
   longitude: number
 }
