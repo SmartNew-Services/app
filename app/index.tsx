@@ -12,12 +12,12 @@ export default function AppIndex() {
         <View jc="center" ai="center" f={1} p="$6">
           <YStack f={1} jc="center" gap="$4">
             <LogoSvg width={200} height={77} />
-            <Title color="$white" fontSize="$8">
+            <Title color="$white" fontSize="$4">
               Olá 👋, seja bem vindo ao Smart Services!
             </Title>
           </YStack>
           <Button
-            onPress={() => router.push('/home/')}
+            onPress={() => router.replace('/home/')}
             w="100%"
             theme="button-test"
           >
