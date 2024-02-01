@@ -23,6 +23,11 @@ export default function HomeScreen() {
 
   function handleChangeMonth(value: string) {
     setCurrentMonth(value)
+    console.log(value)
+    // if (travels) {
+    //   const found = options.find((opt) => opt.label === option)
+    //   setFilteredTravels(found.getValue(travels))
+    // }
   }
 
   return (
@@ -41,7 +46,7 @@ export default function HomeScreen() {
                 description={item.description}
                 status={item.status}
                 distance={item.distance}
-                onPress={() => router.push('/home/[213]')}
+                onPress={() => router.push(`/home/213`)}
               />
             )}
           />
