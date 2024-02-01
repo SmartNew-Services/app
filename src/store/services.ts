@@ -1,55 +1,10 @@
 import { create } from 'zustand'
+import { api } from '../libs/api'
 import db from '../libs/database'
 import { LocationType } from '../types'
+import { ReceivedServiceType, ServiceType } from '../types/Service'
+import { ReceivedTravelType, TravelType } from '../types/Travel'
 import { calculateDistance } from '../utils/calculateDistance'
-
-type TravelType = {
-  id: number
-  serviceId: number
-  startDate: Date
-  endDate: Date | null
-  startLocation: LocationType
-  lastLocation: LocationType
-
-  status: 'progress' | 'paused' | 'canceled' | 'finished'
-  pauses: {
-    started: Date
-    ended: Date | null
-    pausedLocation: LocationType
-    resumedLocation: LocationType | null
-  }[]
-  positions: {
-    time: Date
-    location: LocationType
-  }[]
-  answeredEquipments: {
-    equipmentId: number
-    distanceTraveled: number
-    time: Date
-  }[]
-  distanceTraveled: number
-  syncStatus: 'inserted' | 'updated' | 'synced'
-}
-
-export type ServiceType = {
-  id: number
-  dueDate: Date
-  startDate: null | Date
-  endDate: null | Date
-  driver: string
-
-  status: 'due' | 'progress' | 'canceled' | 'finished'
-  destination: string
-  destinationCoords: LocationType
-  distanceTraveled: number
-  startLocation: LocationType | null
-  travels: TravelType[]
-  listedEquipments: {
-    equipmentId: number
-    answered: boolean
-  }[]
-  syncStatus: 'updated' | 'synced'
-}
 
 interface UseServicesData {
   services: null | ServiceType[]
@@ -85,6 +40,10 @@ interface UseServicesData {
     serviceId: number,
     location: LocationType,
   ) => void
+
+  fetchServices: (user: string) => Promise<void>
+  generateServices: (user: string) => void
+  syncServices: (user: string) => Promise<void>
 }
 
 export const useServices = create<UseServicesData>((set, get) => {
@@ -191,10 +150,10 @@ export const useServices = create<UseServicesData>((set, get) => {
         travel.lastLocation,
         location,
       )
-      travel.positions.push({
-        time: new Date(),
-        location,
-      })
+      // travel.positions.push({
+      //   time: new Date(),
+      //   location,
+      // })
       travel.lastLocation = location
 
       get().updateTravel(travel)
@@ -209,12 +168,12 @@ export const useServices = create<UseServicesData>((set, get) => {
         startLocation: location,
         lastLocation: location,
         pauses: [],
-        positions: [
-          {
-            time: new Date(),
-            location,
-          },
-        ],
+        // positions: [
+        //   {
+        //     time: new Date(),
+        //     location,
+        //   },
+        // ],
         answeredEquipments: [],
         distanceTraveled: 0,
         status: 'progress',
@@ -281,6 +240,81 @@ export const useServices = create<UseServicesData>((set, get) => {
       travel.status = 'finished'
 
       get().updateTravelLocation(travel, location)
+    },
+
+    fetchServices: async (user) => {
+      console.log('Fetch Services')
+      try {
+        const res = await api.get('/services')
+
+        if (res.data) {
+          const data: ReceivedServiceType[] = res.data
+          const receivedTravels: ReceivedTravelType[] = []
+          for (const service of data) {
+            const travelRes = await api.get(`/services/${service.id}/travels`)
+
+            if (travelRes.data) {
+              const travel: ReceivedTravelType[] = res.data
+              receivedTravels.push(...travel)
+            }
+          }
+          db.storeReceivedData(user + '/@services', data)
+          db.storeReceivedData(user + '/@travels', receivedTravels)
+        } else {
+          throw new Error('Erro ao buscar serviços')
+        }
+      } catch (err) {
+        console.log(err)
+      }
+    },
+
+    generateServices: (user) => {
+      console.log('generateServices')
+      try {
+        const storedServices: ReceivedServiceType[] = db.retrieveReceivedData(
+          user,
+          '/@services',
+        )
+        const storedTravels: ReceivedTravelType[] = db.retrieveReceivedData(
+          user,
+          '/@travels',
+        )
+
+        const data: ServiceType[] = storedServices.map((item) => ({
+          ...item,
+          syncStatus: 'synced',
+          travels: storedTravels.map((travel) => ({
+            ...travel,
+            syncStatus: 'synced',
+          })),
+        }))
+        db.storeServices(data)
+      } catch (err) {
+        console.log(err)
+      }
+    },
+
+    syncServices: async (user) => {
+      try {
+        const services: ServiceType[] = db.retriveServices(user)
+
+        const updated: ServiceType[] = []
+
+        services.forEach((service) => {
+          if (service.syncStatus === 'updated') {
+            updated.push(service)
+          }
+        })
+
+        if (updated.length) {
+          console.log('Enviar serviços à API...')
+        } else {
+          get().generateServices(user)
+        }
+      } catch (err) {
+        get().generateServices(user)
+        throw new Error('Erro ao sincronizar serviços')
+      }
     },
   }
 })

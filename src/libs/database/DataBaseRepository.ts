@@ -1,5 +1,5 @@
 import { EquipmentType } from '@/src/store/equipments'
-import { ServiceType } from '@/src/store/services'
+import { ServiceType } from '@/src/types/Service'
 import IDataBaseRepository from './IDataBaseRepository'
 import IDataBaseService from './IDataBaseService'
 
@@ -17,9 +17,25 @@ export default class DataBaseRepository implements IDataBaseRepository {
     }
   }
 
+  retrieveReceivedData(user: string, path: string) {
+    const stored = this.mmkv.getString(user + path)
+    if (stored) {
+      const data = JSON.parse(stored)
+      return data
+    } else {
+      throw new Error(
+        'Não foi possível carregar as informações salvas de ' + path,
+      )
+    }
+  }
+
   storeServices(services: ServiceType[]) {
     const user = this.retrieveLastUser()
     this.mmkv.set(`${user.login}/services`, JSON.stringify(services))
+  }
+
+  storeReceivedData(path: string, data: object) {
+    this.mmkv.set(path, JSON.stringify(data))
   }
 
   retrieveEquipments(user: string) {
