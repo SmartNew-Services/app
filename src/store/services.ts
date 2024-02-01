@@ -297,6 +297,7 @@ export const useServices = create<UseServicesData>((set, get) => {
     syncServices: async (user) => {
       try {
         const services: ServiceType[] = db.retriveServices(user)
+        console.log(services)
 
         const updated: ServiceType[] = []
 
@@ -313,6 +314,7 @@ export const useServices = create<UseServicesData>((set, get) => {
         }
       } catch (err) {
         get().generateServices(user)
+        console.log(err)
         throw new Error('Erro ao sincronizar serviços')
       }
     },

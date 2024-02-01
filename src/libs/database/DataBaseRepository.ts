@@ -1,5 +1,6 @@
 import { EquipmentType } from '@/src/store/equipments'
 import { ServiceType } from '@/src/types/Service'
+import { User } from '@/src/types/User'
 import IDataBaseRepository from './IDataBaseRepository'
 import IDataBaseService from './IDataBaseService'
 
@@ -29,15 +30,6 @@ export default class DataBaseRepository implements IDataBaseRepository {
     }
   }
 
-  storeServices(services: ServiceType[]) {
-    const user = this.retrieveLastUser()
-    this.mmkv.set(`${user.login}/services`, JSON.stringify(services))
-  }
-
-  storeReceivedData(path: string, data: object) {
-    this.mmkv.set(path, JSON.stringify(data))
-  }
-
   retrieveEquipments(user: string) {
     const storedEquipments = this.mmkv.getString(`${user}/equipments`)
     if (storedEquipments) {
@@ -49,13 +41,64 @@ export default class DataBaseRepository implements IDataBaseRepository {
   }
 
   retrieveLastUser() {
-    const storedUserString = this.mmkv.getString('lastUser')
-    if (storedUserString) {
-      const storedUser: { login: string } = JSON.parse(storedUserString)
-      return storedUser
+    const storedUser = this.mmkv.getString('lastUser')
+    if (storedUser) {
+      const user: User = JSON.parse(storedUser)
+      return user
     } else {
-      throw new Error('Não foi possível carregar o usuário logado')
+      return null
     }
+  }
+
+  retrieveActiveToken() {
+    const token = this.mmkv.getString('activeToken')
+    if (token) {
+      return token
+    } else {
+      return null
+    }
+  }
+
+  retriveUsers() {
+    const allUsersString = this.mmkv.getString('users')
+    if (allUsersString) {
+      const allUsers: User[] = JSON.parse(allUsersString)
+      return allUsers
+    } else {
+      return null
+    }
+  }
+
+  storeServices(services: ServiceType[]) {
+    const user = this.retrieveLastUser()
+    if (user) {
+      this.mmkv.set(`${user.login}/services`, JSON.stringify(services))
+    } else {
+      throw new Error('Usuário não encontrado')
+    }
+  }
+
+  storeReceivedData(path: string, data: object) {
+    this.mmkv.set(path, JSON.stringify(data))
+  }
+
+  storeUser(user: User) {
+    this.mmkv.set('lastUser', JSON.stringify(user))
+    const allUsers = this.retriveUsers()
+    const newUsers: User[] = []
+    if (allUsers) {
+      allUsers.forEach((item) => {
+        if (item.login !== user.login) {
+          newUsers.push(item)
+        }
+      })
+    }
+    newUsers.push(user)
+    this.mmkv.set('users', JSON.stringify(newUsers))
+  }
+
+  storeToken(token: string) {
+    this.mmkv.set('activeToken', token)
   }
 
   checkNeedToUpdate() {

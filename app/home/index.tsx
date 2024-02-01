@@ -11,7 +11,6 @@ import { View } from 'tamagui'
 export default function HomeScreen() {
   const { services } = useServices()
   const [currentMonth, setCurrentMonth] = useState<string>('janeiro')
-  console.log(currentMonth)
 
   function handleChangeMonth(value: string) {
     setCurrentMonth(value)
@@ -26,10 +25,11 @@ export default function HomeScreen() {
           <FlatList
             style={{ flex: 1 }}
             data={services}
+            extraData={services}
             renderItem={({ item }) => (
               <TravelCard
                 title={item.destination}
-                date={item.dueDate}
+                date={new Date(item.dueDate)}
                 description={''}
                 status={item.status}
                 distance={'100km'}

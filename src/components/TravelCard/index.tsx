@@ -1,8 +1,8 @@
-import { XStack, YStack } from 'tamagui'
-import { ContainerCard } from './styles'
-import { ComponentProps } from 'react'
-import { SmallText, Subtitle, Text, Title } from '../Typography'
 import { Dot } from 'lucide-react-native'
+import { ComponentProps } from 'react'
+import { XStack, YStack } from 'tamagui'
+import { SmallText, Subtitle, Text, Title } from '../Typography'
+import { ContainerCard } from './styles'
 
 interface TravelCard extends ComponentProps<typeof ContainerCard> {
   date: Date
