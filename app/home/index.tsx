@@ -1,33 +1,19 @@
 import { MonthToggle } from '@/src/components/MonthToggle'
 import { TravelCard } from '@/src/components/TravelCard'
 import { Title } from '@/src/components/Typography'
+import { useServices } from '@/src/store/services'
 import { router } from 'expo-router'
 import { useState } from 'react'
 import { FlatList } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { View } from 'tamagui'
 
-const travelsData = [
-  {
-    title: 'Uberlandia - MG',
-    date: new Date(),
-    description: 'caminhao munk',
-    status: 'fim',
-    distance: '455',
-  },
-]
-
 export default function HomeScreen() {
+  const { services } = useServices()
   const [currentMonth, setCurrentMonth] = useState<string>('janeiro')
-  console.log(currentMonth)
 
   function handleChangeMonth(value: string) {
     setCurrentMonth(value)
-    console.log(value)
-    // if (travels) {
-    //   const found = options.find((opt) => opt.label === option)
-    //   setFilteredTravels(found.getValue(travels))
-    // }
   }
 
   return (
@@ -38,14 +24,15 @@ export default function HomeScreen() {
           <MonthToggle value={currentMonth} onValueChange={handleChangeMonth} />
           <FlatList
             style={{ flex: 1 }}
-            data={travelsData}
+            data={services}
+            extraData={services}
             renderItem={({ item }) => (
               <TravelCard
-                title={item.title}
-                date={item.date}
-                description={item.description}
+                title={item.destination}
+                date={new Date(item.dueDate)}
+                description={''}
                 status={item.status}
-                distance={item.distance}
+                distance={'100km'}
                 onPress={() => router.push(`/home/213`)}
               />
             )}

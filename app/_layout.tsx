@@ -1,17 +1,18 @@
-import { Header } from '@/src/components/Header'
+import { useConnection } from '@/src/store/connection'
 import tamaguiConfig from '@/tamagui.config'
 import dayjs from 'dayjs'
+import 'dayjs/locale/pt-br'
 import { useFonts } from 'expo-font'
 import { Stack } from 'expo-router'
 import * as SplashScreen from 'expo-splash-screen'
 import { useEffect } from 'react'
 import { TamaguiProvider } from 'tamagui'
-import 'dayjs/locale/pt-br'
 export { ErrorBoundary } from 'expo-router'
 
 SplashScreen.preventAutoHideAsync()
 
 export default function RootLayout() {
+  const { establishConnection, testConnection } = useConnection()
   const [loaded] = useFonts({
     Inter: require('../assets/fonts/Inter/static/Inter-Regular.ttf'),
     InterSemibold: require('../assets/fonts/Inter/static/Inter-SemiBold.ttf'),
@@ -24,6 +25,14 @@ export default function RootLayout() {
       // can hide splash screen here
     }
   }, [loaded])
+
+  useEffect(() => {
+    establishConnection()
+    const interval = setInterval(() => {
+      testConnection()
+    }, 15000)
+    return () => clearInterval(interval)
+  }, [])
 
   if (!loaded) {
     return null
