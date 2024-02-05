@@ -1,10 +1,12 @@
 import { Tabs } from '@/src/components/Tabs'
+import { TravelCard } from '@/src/components/TravelCard'
 import { Title } from '@/src/components/Typography'
 import { useServices } from '@/src/store/services'
 import { ServiceType } from '@/src/types/Service'
 import { useLocalSearchParams } from 'expo-router'
 import { CheckCheck, Info, Plus, XCircle } from 'lucide-react-native'
 import { useEffect, useState } from 'react'
+import { FlatList } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Button, SizableText, Text, View } from 'tamagui'
 
@@ -59,64 +61,83 @@ export default function ServiceScreen() {
               </Tabs.Tab>
             </Tabs.List>
             <Tabs.Content value="travels">
-              <View flexDirection="row" f={1} jc="space-between" w="100%">
-                <View ai="center">
-                  <Button
-                    theme="button-light"
-                    w="$5"
-                    h="$5"
-                    borderColor="$slate100"
-                    shadowColor="#000000"
-                    shadowRadius={2}
-                  >
-                    <Plus color="#334155" />
-                  </Button>
-                  <Text fontSize="$1">Nova viagem</Text>
+              <View f={1} gap="$4">
+                <View flexDirection="row" jc="space-between" w="100%">
+                  <View ai="center">
+                    <Button
+                      theme="button-light"
+                      w="$5"
+                      h="$5"
+                      borderColor="$slate100"
+                      shadowColor="#000000"
+                      shadowRadius={2}
+                    >
+                      <Plus color="#334155" />
+                    </Button>
+                    <Text fontSize="$1">Nova viagem</Text>
+                  </View>
+                  <View ai="center">
+                    <Button
+                      theme="button-light"
+                      w="$5"
+                      h="$5"
+                      borderColor="$slate100"
+                      shadowColor="#000000"
+                      shadowRadius={2}
+                    >
+                      <XCircle color="#334155" />
+                    </Button>
+                    <Text fontSize="$1" maxWidth="$7" textAlign="center">
+                      Cancelar atendimento
+                    </Text>
+                  </View>
+                  <View ai="center">
+                    <Button
+                      theme="button-light"
+                      w="$5"
+                      h="$5"
+                      borderColor="$slate100"
+                      shadowColor="#000000"
+                      shadowRadius={2}
+                    >
+                      <CheckCheck color="#334155" />
+                    </Button>
+                    <Text fontSize="$1" maxWidth="$7" textAlign="center">
+                      Finalizar Atendimento
+                    </Text>
+                  </View>
+                  <View ai="center">
+                    <Button
+                      theme="button-light"
+                      w="$5"
+                      h="$5"
+                      borderColor="$slate100"
+                      shadowColor="#000000"
+                      shadowRadius={2}
+                    >
+                      <Info color="#334155" />
+                    </Button>
+                    <Text fontSize="$1" maxWidth="$7" textAlign="center">
+                      Informações
+                    </Text>
+                  </View>
                 </View>
-                <View ai="center">
-                  <Button
-                    theme="button-light"
-                    w="$5"
-                    h="$5"
-                    borderColor="$slate100"
-                    shadowColor="#000000"
-                    shadowRadius={2}
-                  >
-                    <XCircle color="#334155" />
-                  </Button>
-                  <Text fontSize="$1" maxWidth="$7" textAlign="center">
-                    Cancelar atendimento
-                  </Text>
-                </View>
-                <View ai="center">
-                  <Button
-                    theme="button-light"
-                    w="$5"
-                    h="$5"
-                    borderColor="$slate100"
-                    shadowColor="#000000"
-                    shadowRadius={2}
-                  >
-                    <CheckCheck color="#334155" />
-                  </Button>
-                  <Text fontSize="$1" maxWidth="$7" textAlign="center">
-                    Finalizar Atendimento
-                  </Text>
-                </View>
-                <View ai="center">
-                  <Button
-                    theme="button-light"
-                    w="$5"
-                    h="$5"
-                    borderColor="$slate100"
-                    shadowColor="#000000"
-                    shadowRadius={2}
-                  >
-                    <Info color="#334155" />
-                  </Button>
-                  <Text fontSize="$1" maxWidth="$7" textAlign="center">
-                    Informações
-                  </Text>
+                <View f={1}>
+                  <FlatList
+                    style={{ flex: 1 }}
+                    data={services}
+                    extraData={services}
+                    renderItem={({ item }) => (
+                      <TravelCard
+                        title={item.destination}
+                        date={new Date(item.dueDate)}
+                        description={''}
+                        status={item.status}
+                        distance={'100km'}
+                        // onPress={() => router.push(`/home/${item.id}`)}
+                      />
+                    )}
+                  />
                 </View>
               </View>
             </Tabs.Content>

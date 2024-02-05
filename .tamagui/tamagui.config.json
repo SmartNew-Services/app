@@ -21455,9 +21455,9 @@
         "id": "button-red"
       },
       "button-light": {
-        "background": "#F1F5F9",
-        "backgroundPrss": "#CBD5E1",
+        "backgroundPress": "#CBD5E1",
         "color": "#334155",
+        "borderColor": "#F1F5F9",
         "id": "button-light"
       }
     },
