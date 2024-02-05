@@ -41,7 +41,7 @@ interface UseServicesData {
     location: LocationType,
   ) => void
 
-  fetchServices: (user: string) => Promise<void>
+  fetchServices: (user: string, token: string) => Promise<void>
   generateServices: (user: string) => void
   syncServices: (user: string) => Promise<void>
 }
@@ -242,16 +242,25 @@ export const useServices = create<UseServicesData>((set, get) => {
       get().updateTravelLocation(travel, location)
     },
 
-    fetchServices: async (user) => {
+    fetchServices: async (user, token) => {
       console.log('Fetch Services')
+      console.log(token)
       try {
-        const res = await api.get('/services')
+        const res = await api.get('/services', {
+          headers: {
+            Authorization: `bearer ${token}`,
+          },
+        })
 
         if (res.data) {
           const data: ReceivedServiceType[] = res.data
           const receivedTravels: ReceivedTravelType[] = []
           for (const service of data) {
-            const travelRes = await api.get(`/services/${service.id}/travels`)
+            const travelRes = await api.get(`/services/${service.id}/travels`, {
+              headers: {
+                Authorization: `bearer ${token}`,
+              },
+            })
 
             if (travelRes.data) {
               const travel: ReceivedTravelType[] = res.data
@@ -314,8 +323,6 @@ export const useServices = create<UseServicesData>((set, get) => {
         }
       } catch (err) {
         get().generateServices(user)
-        console.log(err)
-        throw new Error('Erro ao sincronizar serviços')
       }
     },
   }

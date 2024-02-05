@@ -13,9 +13,9 @@ export default function LayoutHome() {
 
   const [needToUpdate, setNeedToUpdate] = useState(true)
 
-  async function requestData() {
+  async function requestData(login: string, token: string) {
     return new Promise<void>((resolve, reject) => {
-      Promise.all([fetchServices('dev_03')])
+      Promise.all([fetchServices(login, token)])
         .then(() => resolve())
         .catch((err) => reject(err))
     })
@@ -23,12 +23,13 @@ export default function LayoutHome() {
 
   useEffect(() => {
     if (isConnected && needToUpdate && user && token) {
-      requestData()
+      console.log(user)
+      requestData(user.login, token)
         .then(() => syncServices('dev_03'))
         .then(() => {
           console.log('Synced')
           db.setNeedToUpdate(false)
-          loadServices(user?.login)
+          loadServices(user.login)
         })
         .catch((err) => console.log(err))
     }
