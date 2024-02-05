@@ -33,7 +33,7 @@ export default function HomeScreen() {
                 description={''}
                 status={item.status}
                 distance={'100km'}
-                onPress={() => router.push(`/home/213`)}
+                onPress={() => router.push(`/home/${item.id}`)}
               />
             )}
           />
