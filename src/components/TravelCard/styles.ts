@@ -4,21 +4,9 @@ export const ContainerCard = styled(XStack, {
   p: '$4',
   gap: '$5',
 
-  variants: {
-    variant: {
-      solid: {
-        bg: '$slate100',
-        borderRadius: 8,
-      },
+  bg: 'transparent',
 
-      transparent: {
-        bg: 'transparent',
-        px: 0,
-      },
-    },
-  },
-
-  defaultVariants: {
-    variant: 'solid',
-  },
+  borderWidth: 2,
+  borderColor: '$white',
+  borderTopColor: '$slate100',
 })

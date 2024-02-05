@@ -1,7 +1,7 @@
 import { router } from 'expo-router'
 import { ChevronLeft, Menu, RefreshCcw, Wifi } from 'lucide-react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
-import { Button, XStack, useTheme } from 'tamagui'
+import { Button, XStack } from 'tamagui'
 import { Text } from './Typography'
 
 export function Header() {
@@ -18,7 +18,7 @@ export function Header() {
       ai="center"
       jc="space-between"
     >
-      <XStack gap="$4">
+      <XStack gap="$4" ai="center">
         {router.canGoBack() && (
           <Button onPress={() => router.back()}>
             <ChevronLeft width={16} height={16} color="#000" />
@@ -28,7 +28,7 @@ export function Header() {
         <XStack
           bg="$green200"
           px="$2"
-          py="$0.5"
+          py="$1"
           ai="center"
           gap="$2"
           borderRadius={999}

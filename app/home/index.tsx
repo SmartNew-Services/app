@@ -1,5 +1,5 @@
 import { MonthToggle } from '@/src/components/MonthToggle'
-import { TravelCard } from '@/src/components/TravelCard'
+import { ServiceCard } from '@/src/components/ServiceCard'
 import { Title } from '@/src/components/Typography'
 import { useServices } from '@/src/store/services'
 import { router } from 'expo-router'
@@ -27,13 +27,13 @@ export default function HomeScreen() {
             data={services}
             extraData={services}
             renderItem={({ item }) => (
-              <TravelCard
+              <ServiceCard
                 title={item.destination}
                 date={new Date(item.dueDate)}
                 description={''}
                 status={item.status}
                 distance={'100km'}
-                onPress={() => router.push(`/home/213`)}
+                onPress={() => router.push(`/home/${item.id}`)}
               />
             )}
           />

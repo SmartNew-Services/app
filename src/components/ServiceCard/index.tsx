@@ -1,9 +1,10 @@
 import { Dot } from 'lucide-react-native'
+import { ComponentProps } from 'react'
 import { XStack, YStack } from 'tamagui'
 import { SmallText, Subtitle, Text, Title } from '../Typography'
 import { ContainerCard } from './styles'
 
-interface TravelCard {
+interface ServiceCard extends ComponentProps<typeof ContainerCard> {
   date: Date
   title: string
   description: string
@@ -18,15 +19,16 @@ const statuses = {
   finished: 'Finalizado',
 }
 
-export function TravelCard({
+export function ServiceCard({
   date,
   title,
   description,
   distance,
   status,
-}: TravelCard) {
+  ...props
+}: ServiceCard) {
   return (
-    <ContainerCard gap="$5" padding="$5">
+    <ContainerCard gap="$5" padding="$5" {...props}>
       <YStack ai="center">
         <Subtitle
           color="$purple600"

@@ -1,6 +1,6 @@
+import { config as TConfig } from '@tamagui/config'
 import { radius, size, space, zIndex } from '@tamagui/themes'
 import { createFont, createTamagui, createTokens } from 'tamagui'
-import { config as TConfig } from '@tamagui/config'
 
 const tokens = createTokens({
   size,
@@ -18,6 +18,7 @@ const tokens = createTokens({
     slate300: '#CBD5E1',
     slate700: '#334155',
     slate900: '#0f172a',
+    zinc200: '#e4e4e7',
     zinc500: '#71717a',
     red200: '#fecaca',
     red500: '#EF4444',
@@ -118,6 +119,12 @@ const config = createTamagui({
       backgroundPress: tokens.color.red600, // darker background on press
       // backgroundHover: tokens.color.purple100, // lighter background on hover
       color: tokens.color.white,
+    },
+
+    'button-light': {
+      backgroundPress: tokens.color.slate300,
+      color: tokens.color.slate700,
+      borderColor: tokens.color.slate100,
     },
   },
   fonts: {
