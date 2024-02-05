@@ -9,7 +9,14 @@ interface TravelCard extends ComponentProps<typeof ContainerCard> {
   title: string
   description: string
   distance?: string
-  status: string
+  status: 'due' | 'progress' | 'canceled' | 'finished'
+}
+
+const statuses = {
+  due: 'A iniciar',
+  progress: 'Em progresso',
+  canceled: 'Cancelado',
+  finished: 'Finalizado',
 }
 
 export function TravelCard({
@@ -21,21 +28,23 @@ export function TravelCard({
   ...props
 }: TravelCard) {
   return (
-    <ContainerCard gap="$4" {...props}>
+    <ContainerCard gap="$5" padding="$5" {...props}>
       <YStack ai="center">
         <Subtitle
           color="$purple600"
           textTransform="uppercase"
-          fontWeight="bold"
+          // fontWeight="bold"
         >
           {date.toLocaleDateString('pt-BR', {
             weekday: 'short',
           })}
         </Subtitle>
-        <Title color="$slate700">{date.getDay()}</Title>
+        <Title color="$slate700">
+          {date.getDate().toFixed().padStart(2, '0')}
+        </Title>
       </YStack>
       <YStack f={1}>
-        <Text textTransform="uppercase" fontWeight="bold">
+        <Text textTransform="uppercase" fontSize="$2">
           {title}
         </Text>
         <XStack ai="center">
@@ -50,14 +59,12 @@ export function TravelCard({
         <SmallText
           marginLeft="auto"
           bg="$purple200"
-          px="$2"
-          py="$1"
+          px="$3"
+          py="$2"
           br={999}
           color="$purple600"
-          textTransform="uppercase"
-          fontWeight="bold"
         >
-          {status}
+          {statuses[status]}
         </SmallText>
       </YStack>
     </ContainerCard>
