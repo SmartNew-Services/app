@@ -19,7 +19,7 @@ export default function HomeScreen() {
   return (
     <View f={1} bg="$background">
       <SafeAreaView style={{ flex: 1 }}>
-        <View f={1} p="$6" gap="$4">
+        <View f={1} py="$2" px="$4" gap="$4">
           <Title>Inicio</Title>
           <MonthToggle value={currentMonth} onValueChange={handleChangeMonth} />
           <FlatList
