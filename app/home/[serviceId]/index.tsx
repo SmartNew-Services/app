@@ -3,6 +3,7 @@ import { TravelCard } from '@/src/components/TravelCard'
 import { Title } from '@/src/components/Typography'
 import { useServices } from '@/src/store/services'
 import { ServiceType } from '@/src/types/Service'
+import { TravelType } from '@/src/types/Travel'
 import { useLocalSearchParams } from 'expo-router'
 import { CheckCheck, Info, Plus, XCircle } from 'lucide-react-native'
 import { useEffect, useState } from 'react'
@@ -16,14 +17,16 @@ export default function ServiceScreen() {
   const [selectedService, setSelectedService] = useState<ServiceType | null>(
     null,
   )
+  const [travels, setTravels] = useState<TravelType[] | null>(null)
   const [activeTab, setActiveTab] = useState('travels')
 
   useEffect(() => {
     const found = services?.find((item) => item.id === Number(serviceId))
     if (found) {
       setSelectedService(found)
+      setTravels(found.travels)
     }
-  }, [serviceId])
+  }, [serviceId, services])
 
   function handleSelectTab(tab: string) {
     setActiveTab(tab)
@@ -125,12 +128,12 @@ export default function ServiceScreen() {
                 <View f={1}>
                   <FlatList
                     style={{ flex: 1 }}
-                    data={services}
-                    extraData={services}
+                    data={travels}
+                    extraData={travels}
                     renderItem={({ item }) => (
                       <TravelCard
-                        title={item.destination}
-                        date={new Date(item.dueDate)}
+                        title={selectedService.destination}
+                        date={new Date(item.startDate)}
                         description={''}
                         status={item.status}
                         distance={'100km'}

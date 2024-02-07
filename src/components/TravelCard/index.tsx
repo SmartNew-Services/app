@@ -8,11 +8,11 @@ interface TravelCard {
   title: string
   description: string
   distance?: string
-  status: 'due' | 'progress' | 'canceled' | 'finished'
+  status: 'progress' | 'canceled' | 'finished' | 'paused'
 }
 
 const statuses = {
-  due: 'A iniciar',
+  paused: 'Pausado',
   progress: 'Em progresso',
   canceled: 'Cancelado',
   finished: 'Finalizado',
