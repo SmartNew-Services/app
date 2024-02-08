@@ -1,3 +1,4 @@
+import { SheetModal } from '@/src/components/SheetModal'
 import { Tabs } from '@/src/components/Tabs'
 import { TravelCard } from '@/src/components/TravelCard'
 import { Title } from '@/src/components/Typography'
@@ -9,7 +10,7 @@ import { CheckCheck, Info, Plus, XCircle } from 'lucide-react-native'
 import { useEffect, useState } from 'react'
 import { FlatList } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { Button, SizableText, Text, View } from 'tamagui'
+import { Button, Sheet, SizableText, Text, View } from 'tamagui'
 
 export default function ServiceScreen() {
   const { serviceId } = useLocalSearchParams()
@@ -19,6 +20,7 @@ export default function ServiceScreen() {
   )
   const [travels, setTravels] = useState<TravelType[] | null>(null)
   const [activeTab, setActiveTab] = useState('travels')
+  const [open, setOpen] = useState(false)
 
   useEffect(() => {
     const found = services?.find((item) => item.id === Number(serviceId))
@@ -42,7 +44,7 @@ export default function ServiceScreen() {
   }
 
   return (
-    <View f={1} bg="$background">
+    <View f={1} bg="$white">
       <SafeAreaView style={{ flex: 1 }}>
         <View f={1} py="$2" px="$4" gap="$4">
           <Title>{selectedService.destination}</Title>
@@ -74,6 +76,7 @@ export default function ServiceScreen() {
                       borderColor="$slate100"
                       shadowColor="#000000"
                       shadowRadius={2}
+                      onPress={() => setOpen(true)}
                     >
                       <Plus color="#334155" />
                     </Button>
@@ -150,6 +153,21 @@ export default function ServiceScreen() {
           </Tabs.Container>
         </View>
       </SafeAreaView>
+
+      <SheetModal
+        dismissOnSnapToBottom
+        dismissOnOverlayPress
+        open={open}
+        onOpenChange={setOpen}
+        modal
+      >
+        <SheetModal.Overlay />
+        <SheetModal.Handle />
+
+        <SheetModal.Frame>
+          <Text>Test</Text>
+        </SheetModal.Frame>
+      </SheetModal>
     </View>
   )
 }
