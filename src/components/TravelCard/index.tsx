@@ -7,7 +7,7 @@ interface TravelCard {
   date: Date
   title: string
   description: string
-  distance?: string
+  distance?: number
   status: 'progress' | 'canceled' | 'finished' | 'paused'
 }
 
@@ -48,7 +48,7 @@ export function TravelCard({
         <XStack ai="center">
           {distance && (
             <>
-              <SmallText>{distance}</SmallText>
+              <SmallText>{distance.toFixed(0) + 'km'}</SmallText>
               <Dot color="#71717a" />
             </>
           )}

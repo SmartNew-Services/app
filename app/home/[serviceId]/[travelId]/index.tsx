@@ -1,9 +1,5 @@
-import { Text, View } from 'react-native'
+import { Text } from 'tamagui'
 
 export default function TravelScreen() {
-  return (
-    <View>
-      <Text>Travel screen</Text>
-    </View>
-  )
+  return <Text>Tela Viagem</Text>
 }

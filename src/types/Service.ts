@@ -1,3 +1,4 @@
+import { DestinationType } from './Destination'
 import { LocationType } from './LocationType'
 import { TravelType } from './Travel'
 
@@ -9,8 +10,7 @@ export interface ReceivedServiceType {
   driver: string
 
   status: 'due' | 'progress' | 'canceled' | 'finished'
-  destination: string
-  destinationCoords: LocationType
+  destination: DestinationType
   distanceTraveled: number
   startLocation: LocationType | null
   listedEquipments: {

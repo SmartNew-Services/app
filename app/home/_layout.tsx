@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react'
 
 export default function LayoutHome() {
   const { isConnected } = useConnection()
-  const { loadServices, fetchServices, syncServices } = useServices()
+  const { services, loadServices, fetchServices, syncServices } = useServices()
   const { user, token } = useAuth()
 
   const [needToUpdate, setNeedToUpdate] = useState(true)
@@ -22,10 +22,16 @@ export default function LayoutHome() {
   }
 
   useEffect(() => {
+    if (!services && !needToUpdate && user) {
+      loadServices(user.login)
+    }
+  }, [services])
+
+  useEffect(() => {
     if (isConnected && needToUpdate && user && token) {
       console.log(user)
       requestData(user.login, token)
-        .then(() => syncServices('dev_03'))
+        .then(() => syncServices(user.login))
         .then(() => {
           console.log('Synced')
           db.setNeedToUpdate(false)

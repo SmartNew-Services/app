@@ -1,4 +1,4 @@
-import { Stack, styled, createSheet, Sheet } from 'tamagui'
+import { Stack, createSheet, styled } from 'tamagui'
 
 const Handle = styled(Stack, {
   bg: '#ffffff90',

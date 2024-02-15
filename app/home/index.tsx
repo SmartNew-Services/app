@@ -16,6 +16,8 @@ export default function HomeScreen() {
     setCurrentMonth(value)
   }
 
+  console.log(JSON.stringify(services, null, 2))
+
   return (
     <View f={1} bg="$background">
       <SafeAreaView style={{ flex: 1 }}>
@@ -28,7 +30,7 @@ export default function HomeScreen() {
             extraData={services}
             renderItem={({ item }) => (
               <ServiceCard
-                title={item.destination}
+                title={item.destination.description}
                 date={new Date(item.dueDate)}
                 description={''}
                 status={item.status}
