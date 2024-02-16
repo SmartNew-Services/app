@@ -48,5 +48,14 @@ export default function LayoutHome() {
     return () => clearInterval(interval)
   }, [])
 
-  return <Stack screenOptions={{ header: Header }} />
+  return (
+    <Stack>
+      <Stack.Screen name="index" options={{ header: Header }} />
+      <Stack.Screen name="services/[serviceId]" options={{ header: Header }} />
+      <Stack.Screen
+        name="travels/[travelId]/index"
+        options={{ headerShown: false }}
+      />
+    </Stack>
+  )
 }

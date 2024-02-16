@@ -20,6 +20,7 @@ const tokens = createTokens({
     slate900: '#0f172a',
     zinc200: '#e4e4e7',
     zinc500: '#71717a',
+    zinc700: '#334155',
     red200: '#fecaca',
     red500: '#EF4444',
     red600: '#dc2626',

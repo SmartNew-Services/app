@@ -16,8 +16,6 @@ export default function HomeScreen() {
     setCurrentMonth(value)
   }
 
-  console.log(JSON.stringify(services, null, 2))
-
   return (
     <View f={1} bg="$background">
       <SafeAreaView style={{ flex: 1 }}>
@@ -35,7 +33,7 @@ export default function HomeScreen() {
                 description={''}
                 status={item.status}
                 distance={'100km'}
-                onPress={() => router.push(`/home/${item.id}`)}
+                onPress={() => router.push(`/home/services/${item.id}`)}
               />
             )}
           />

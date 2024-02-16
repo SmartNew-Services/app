@@ -38,7 +38,6 @@ export default function ServiceScreen() {
   const [travels, setTravels] = useState<TravelType[] | null>(null)
   const [activeTab, setActiveTab] = useState('travels')
   const [open, setOpen] = useState(false)
-
   const createTravelForm = useForm<CreateTravelData>({
     resolver: zodResolver(createTravelSchema),
   })
@@ -215,22 +214,20 @@ export default function ServiceScreen() {
                     style={{ flex: 1 }}
                     data={travels}
                     extraData={travels}
-                    renderItem={({ item }) => {
-                      console.log(item)
-                      return (
-                        <TravelCard
-                          title={selectedService.destination.description}
-                          date={new Date(item.startDate)}
-                          description={''}
-                          status={item.status}
-                          distance={calculateDistance(
-                            currentLocation.coords,
-                            item.destination,
-                          )}
-                          // onPress={() => router.push(`/home/${item.id}`)}
-                        />
-                      )
-                    }}
+                    renderItem={({ item }) => (
+                      <TravelCard
+                        title={selectedService.destination.description}
+                        date={new Date(item.startDate)}
+                        description={''}
+                        status={item.status}
+                        href={`/home/travels/${item.id}`}
+                        distance={calculateDistance(
+                          currentLocation.coords,
+                          item.destination,
+                        )}
+                        // onPress={() => router.push(`/home/${item.id}`)}
+                      />
+                    )}
                   />
                 </View>
               </View>
