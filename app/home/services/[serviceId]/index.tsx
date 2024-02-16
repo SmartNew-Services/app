@@ -46,7 +46,6 @@ export default function ServiceScreen() {
 
   function handleSelectTab(tab: string) {
     setActiveTab(tab)
-    console.log(activeTab)
   }
 
   function handleCreateTravel(data: CreateTravelData) {

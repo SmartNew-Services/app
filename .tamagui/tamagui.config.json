@@ -22646,108 +22646,115 @@
           "val": "#71717a",
           "variable": ""
         },
+        "zinc700": {
+          "isVar": true,
+          "key": "$zinc700",
+          "name": "color-13",
+          "val": "#334155",
+          "variable": ""
+        },
         "red200": {
           "isVar": true,
           "key": "$red200",
-          "name": "color-13",
+          "name": "color-14",
           "val": "#fecaca",
           "variable": ""
         },
         "red500": {
           "isVar": true,
           "key": "$red500",
-          "name": "color-14",
+          "name": "color-15",
           "val": "#EF4444",
           "variable": ""
         },
         "red600": {
           "isVar": true,
           "key": "$red600",
-          "name": "color-15",
+          "name": "color-16",
           "val": "#dc2626",
           "variable": ""
         },
         "red400": {
           "isVar": true,
           "key": "$red400",
-          "name": "color-16",
+          "name": "color-17",
           "val": "#F87171",
           "variable": ""
         },
         "green200": {
           "isVar": true,
           "key": "$green200",
-          "name": "color-17",
+          "name": "color-18",
           "val": "#bbf7d0",
           "variable": ""
         },
         "green300": {
           "isVar": true,
           "key": "$green300",
-          "name": "color-18",
+          "name": "color-19",
           "val": "#86EFAC",
           "variable": ""
         },
         "green500": {
           "isVar": true,
           "key": "$green500",
-          "name": "color-19",
+          "name": "color-20",
           "val": "#22c55e",
           "variable": ""
         },
         "green600": {
           "isVar": true,
           "key": "$green600",
-          "name": "color-20",
+          "name": "color-21",
           "val": "#16a34a",
           "variable": ""
         },
         "green700": {
           "isVar": true,
           "key": "$green700",
-          "name": "color-21",
+          "name": "color-22",
           "val": "#15803D",
           "variable": ""
         },
         "background": {
           "isVar": true,
           "key": "$background",
-          "name": "color-22",
+          "name": "color-23",
           "val": "#FFF",
           "variable": ""
         },
         "black": {
           "isVar": true,
           "key": "$black",
-          "name": "color-23",
+          "name": "color-24",
           "val": "#000",
           "variable": ""
         },
         "white": {
           "isVar": true,
           "key": "$white",
-          "name": "color-24",
+          "name": "color-25",
           "val": "#FFF",
           "variable": ""
         },
         "text": {
           "isVar": true,
           "key": "$text",
-          "name": "color-25",
+          "name": "color-26",
           "val": "#0F172A",
           "variable": ""
         },
         "textThin": {
           "isVar": true,
           "key": "$textThin",
-          "name": "color-26",
+          "name": "color-27",
           "val": "#475569",
           "variable": ""
         },
         "textShallow": {
           "isVar": true,
           "key": "$textShallow",
-          "name": "color-27",
+          "name": "color-28",
           "val": "#94A3B8",
           "variable": ""
         }
@@ -23681,108 +23688,115 @@
         "val": "#71717a",
         "variable": ""
       },
+      "$color.zinc700": {
+        "isVar": true,
+        "key": "$zinc700",
+        "name": "color-13",
+        "val": "#334155",
+        "variable": ""
+      },
       "$color.red200": {
         "isVar": true,
         "key": "$red200",
-        "name": "color-13",
+        "name": "color-14",
         "val": "#fecaca",
         "variable": ""
       },
       "$color.red500": {
         "isVar": true,
         "key": "$red500",
-        "name": "color-14",
+        "name": "color-15",
         "val": "#EF4444",
         "variable": ""
       },
       "$color.red600": {
         "isVar": true,
         "key": "$red600",
-        "name": "color-15",
+        "name": "color-16",
         "val": "#dc2626",
         "variable": ""
       },
       "$color.red400": {
         "isVar": true,
         "key": "$red400",
-        "name": "color-16",
+        "name": "color-17",
         "val": "#F87171",
         "variable": ""
       },
       "$color.green200": {
         "isVar": true,
         "key": "$green200",
-        "name": "color-17",
+        "name": "color-18",
         "val": "#bbf7d0",
         "variable": ""
       },
       "$color.green300": {
         "isVar": true,
         "key": "$green300",
-        "name": "color-18",
+        "name": "color-19",
         "val": "#86EFAC",
         "variable": ""
       },
       "$color.green500": {
         "isVar": true,
         "key": "$green500",
-        "name": "color-19",
+        "name": "color-20",
         "val": "#22c55e",
         "variable": ""
       },
       "$color.green600": {
         "isVar": true,
         "key": "$green600",
-        "name": "color-20",
+        "name": "color-21",
         "val": "#16a34a",
         "variable": ""
       },
       "$color.green700": {
         "isVar": true,
         "key": "$green700",
-        "name": "color-21",
+        "name": "color-22",
         "val": "#15803D",
         "variable": ""
       },
       "$color.background": {
         "isVar": true,
         "key": "$background",
-        "name": "color-22",
+        "name": "color-23",
         "val": "#FFF",
         "variable": ""
       },
       "$color.black": {
         "isVar": true,
         "key": "$black",
-        "name": "color-23",
+        "name": "color-24",
         "val": "#000",
         "variable": ""
       },
       "$color.white": {
         "isVar": true,
         "key": "$white",
-        "name": "color-24",
+        "name": "color-25",
         "val": "#FFF",
         "variable": ""
       },
       "$color.text": {
         "isVar": true,
         "key": "$text",
-        "name": "color-25",
+        "name": "color-26",
         "val": "#0F172A",
         "variable": ""
       },
       "$color.textThin": {
         "isVar": true,
         "key": "$textThin",
-        "name": "color-26",
+        "name": "color-27",
         "val": "#475569",
         "variable": ""
       },
       "$color.textShallow": {
         "isVar": true,
         "key": "$textShallow",
-        "name": "color-27",
+        "name": "color-28",
         "val": "#94A3B8",
         "variable": ""
       }

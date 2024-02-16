@@ -285,7 +285,7 @@ export const useServices = create<UseServicesData>((set, get) => {
             })
 
             if (travelRes.data) {
-              const travel: ReceivedTravelType[] = res.data
+              const travel: ReceivedTravelType[] = travelRes.data
               receivedTravels.push(...travel)
             }
           }

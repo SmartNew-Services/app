@@ -2,6 +2,7 @@ import { SheetModal } from '@/src/components/SheetModal'
 import { Subtitle, Title } from '@/src/components/Typography'
 import { useLocationStore } from '@/src/store/location'
 import { useServices } from '@/src/store/services'
+import { ServiceType } from '@/src/types/Service'
 import { TravelType } from '@/src/types/Travel'
 import { calculateDistance } from '@/src/utils/calculateDistance'
 import { useLocalSearchParams } from 'expo-router'
@@ -14,6 +15,7 @@ export default function TravelScreen() {
   const { services } = useServices()
   const { currentLocation } = useLocationStore()
   const [selectedTravel, setSelectedTravel] = useState<TravelType | null>(null)
+  const [parentService, setParentService] = useState<ServiceType | null>(null)
   const [equipmentsOpen, setEquipmentsOpen] = useState(false)
 
   useEffect(() => {
@@ -23,15 +25,17 @@ export default function TravelScreen() {
       const found = allTravels.find((item) => item.id === Number(travelId))
       if (found) {
         setSelectedTravel(found)
+        setParentService(
+          services.find((item) => item.id === found.serviceId) || null,
+        )
       }
     }
   }, [services, travelId])
 
-  if (!selectedTravel || !currentLocation) {
+  if (!selectedTravel || !currentLocation || !parentService) {
     return <Text>Carregando...</Text>
   }
 
-  console.log(JSON.stringify(selectedTravel, null, 2))
   return (
     <View f={1} bg="$white">
       <View height="60%" width="100%" bg="$green200"></View>
@@ -41,7 +45,8 @@ export default function TravelScreen() {
             <Title>{selectedTravel.destination.description}</Title>
             <Subtitle fontSize="$2" color="$zinc500">
               Viagem de{' '}
-              {selectedTravel.origin?.description === 'origin'
+              {selectedTravel.destination.description ===
+              parentService.destination.description
                 ? 'ida'
                 : 'volta'}
             </Subtitle>
