@@ -28,12 +28,12 @@ export default function HomeScreen() {
             extraData={services}
             renderItem={({ item }) => (
               <ServiceCard
-                title={item.destination}
+                title={item.destination.description}
                 date={new Date(item.dueDate)}
                 description={''}
                 status={item.status}
                 distance={'100km'}
-                onPress={() => router.push(`/home/${item.id}`)}
+                onPress={() => router.push(`/home/services/${item.id}`)}
               />
             )}
           />

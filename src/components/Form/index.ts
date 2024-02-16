@@ -1,6 +1,8 @@
 import { FormInput } from './Input'
+import { FormSelect } from './Select'
 // import { TextArea } from './TextArea'
 
 export const Form = {
-  FormInput,
+  Input: FormInput,
+  Select: FormSelect,
 }

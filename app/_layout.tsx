@@ -1,5 +1,6 @@
 import { useConnection } from '@/src/store/connection'
 import tamaguiConfig from '@/tamagui.config'
+import { DefaultTheme, ThemeProvider } from '@react-navigation/native'
 import dayjs from 'dayjs'
 import 'dayjs/locale/pt-br'
 import { useFonts } from 'expo-font'
@@ -44,7 +45,9 @@ export default function RootLayout() {
 function RootLayoutNav() {
   return (
     <TamaguiProvider config={tamaguiConfig} defaultTheme="light">
-      <Stack screenOptions={{ headerShown: false }} />
+      <ThemeProvider value={DefaultTheme}>
+        <Stack screenOptions={{ headerShown: false }} />
+      </ThemeProvider>
     </TamaguiProvider>
   )
 }

@@ -19,7 +19,25 @@ interface UseServicesData {
   findTravel: (travelId: number, serviceId: number) => TravelType
   updateTravel: (travel: TravelType) => void
   updateTravelLocation: (travel: TravelType, location: LocationType) => void
-  createTravel: (serviceId: number, location: LocationType) => void
+  createTravel: ({
+    serviceId,
+    location,
+    origin,
+    destination,
+  }: {
+    serviceId: number
+    location: LocationType
+    origin: {
+      latitude: number
+      longitude: number
+      description: string
+    }
+    destination: {
+      latitude: number
+      longitude: number
+      description: string
+    }
+  }) => TravelType
   pauseTravel: (
     travelId: number,
     serviceId: number,
@@ -159,7 +177,7 @@ export const useServices = create<UseServicesData>((set, get) => {
       get().updateTravel(travel)
     },
 
-    createTravel: (serviceId, location) => {
+    createTravel: ({ serviceId, location, origin, destination }) => {
       const newTravel: TravelType = {
         id: new Date().getTime(),
         serviceId,
@@ -168,15 +186,18 @@ export const useServices = create<UseServicesData>((set, get) => {
         startLocation: location,
         lastLocation: location,
         pauses: [],
+        origin,
+        destination,
         // positions: [
         //   {
         //     time: new Date(),
         //     location,
         //   },
         // ],
+
         answeredEquipments: [],
         distanceTraveled: 0,
-        status: 'progress',
+        status: 'paused',
         syncStatus: 'inserted',
       }
 
@@ -184,6 +205,7 @@ export const useServices = create<UseServicesData>((set, get) => {
       service.travels = [...service.travels, newTravel]
 
       get().updateService(serviceId, service)
+      return newTravel
     },
 
     cancelTravel: (travelId, serviceId, location) => {

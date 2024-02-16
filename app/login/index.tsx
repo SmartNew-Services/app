@@ -71,7 +71,7 @@ export default function Login() {
             <View gap="$3">
               <View gap="$2">
                 <Text>Login:</Text>
-                <Form.FormInput
+                <Form.Input
                   autoCorrect={false}
                   allowFontScaling={false}
                   autoCapitalize="none"
@@ -82,7 +82,7 @@ export default function Login() {
 
               <View gap="$2">
                 <Text>Senha:</Text>
-                <Form.FormInput
+                <Form.Input
                   name="pass"
                   autoCorrect={false}
                   allowFontScaling={false}

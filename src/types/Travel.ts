@@ -1,3 +1,4 @@
+import { DestinationType } from './Destination'
 import { LocationType } from './LocationType'
 
 export interface ReceivedTravelType {
@@ -7,6 +8,8 @@ export interface ReceivedTravelType {
   endDate: Date | null
   startLocation: LocationType
   lastLocation: LocationType
+  destination: DestinationType
+  origin: DestinationType
 
   status: 'progress' | 'paused' | 'canceled' | 'finished'
   pauses: {
@@ -17,7 +20,6 @@ export interface ReceivedTravelType {
   }[]
   answeredEquipments: {
     equipmentId: number
-    distanceTraveled: number
     time: Date
   }[]
   distanceTraveled: number

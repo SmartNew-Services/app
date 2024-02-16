@@ -11,7 +11,7 @@ export function Header() {
     <XStack
       p="$4"
       pt={insets.top}
-      bg="$background"
+      bg="$white"
       borderBottomColor="$slate300"
       borderBottomWidth={1}
       w="100%"

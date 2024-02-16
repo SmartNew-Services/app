@@ -1,3 +1,4 @@
+import { Link } from 'expo-router'
 import { Dot } from 'lucide-react-native'
 import { XStack, YStack } from 'tamagui'
 import { SmallText, Subtitle, Text, Title } from '../Typography'
@@ -7,12 +8,13 @@ interface TravelCard {
   date: Date
   title: string
   description: string
-  distance?: string
-  status: 'due' | 'progress' | 'canceled' | 'finished'
+  href: string
+  distance?: number
+  status: 'progress' | 'canceled' | 'finished' | 'paused'
 }
 
 const statuses = {
-  due: 'A iniciar',
+  paused: 'Pausado',
   progress: 'Em progresso',
   canceled: 'Cancelado',
   finished: 'Finalizado',
@@ -24,47 +26,50 @@ export function TravelCard({
   description,
   distance,
   status,
+  href,
 }: TravelCard) {
   return (
-    <ContainerCard gap="$5" padding="$5">
-      <YStack ai="center">
-        <Subtitle
-          color="$purple600"
-          textTransform="uppercase"
-          // fontWeight="bold"
-        >
-          {date.toLocaleDateString('pt-BR', {
-            weekday: 'short',
-          })}
-        </Subtitle>
-        <Title color="$slate700">
-          {date.getDate().toFixed().padStart(2, '0')}
-        </Title>
-      </YStack>
-      <YStack f={1}>
-        <Text textTransform="uppercase" fontSize="$2">
-          {title}
-        </Text>
-        <XStack ai="center">
-          {distance && (
-            <>
-              <SmallText>{distance}</SmallText>
-              <Dot color="#71717a" />
-            </>
-          )}
-          <SmallText textTransform="uppercase">{description}</SmallText>
-        </XStack>
-        <SmallText
-          marginLeft="auto"
-          bg="$purple200"
-          px="$3"
-          py="$2"
-          br={999}
-          color="$purple600"
-        >
-          {statuses[status]}
-        </SmallText>
-      </YStack>
-    </ContainerCard>
+    <Link href={href} asChild>
+      <ContainerCard gap="$5" padding="$5">
+        <YStack ai="center">
+          <Subtitle
+            color="$purple600"
+            textTransform="uppercase"
+            // fontWeight="bold"
+          >
+            {date.toLocaleDateString('pt-BR', {
+              weekday: 'short',
+            })}
+          </Subtitle>
+          <Title color="$slate700">
+            {date.getDate().toFixed().padStart(2, '0')}
+          </Title>
+        </YStack>
+        <YStack f={1}>
+          <Text textTransform="uppercase" fontSize="$2">
+            {title}
+          </Text>
+          <XStack ai="center">
+            {distance && (
+              <>
+                <SmallText>{distance.toFixed(0) + 'km'}</SmallText>
+                <Dot color="#71717a" />
+              </>
+            )}
+            <SmallText textTransform="uppercase">{description}</SmallText>
+          </XStack>
+          <SmallText
+            marginLeft="auto"
+            bg="$purple200"
+            px="$3"
+            py="$2"
+            br={999}
+            color="$purple600"
+          >
+            {statuses[status]}
+          </SmallText>
+        </YStack>
+      </ContainerCard>
+    </Link>
   )
 }

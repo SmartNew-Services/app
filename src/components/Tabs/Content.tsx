@@ -9,13 +9,13 @@ interface ContentProps {
 export function Content({ children, value }: ContentProps) {
   return (
     <Tabs.Content
-      backgroundColor="$background"
+      backgroundColor="$white"
       key={value}
       padding="$2"
       alignItems="center"
       justifyContent="center"
       flex={1}
-      borderColor="$background"
+      borderColor="$white"
       borderRadius="$2"
       borderTopLeftRadius={0}
       borderTopRightRadius={0}
