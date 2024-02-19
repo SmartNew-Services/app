@@ -16,6 +16,7 @@ const tokens = createTokens({
     purple600: '#7c3aed',
     slate100: '#F1F5F9',
     slate300: '#CBD5E1',
+    slate500: '#64748B',
     slate700: '#334155',
     slate900: '#0f172a',
     zinc200: '#e4e4e7',

@@ -2,7 +2,12 @@ import { Header } from '@/src/components/Header'
 import db from '@/src/libs/database'
 import { useAuth } from '@/src/store/auth'
 import { useConnection } from '@/src/store/connection'
+import { useLocationStore } from '@/src/store/location'
 import { useServices } from '@/src/store/services'
+import {
+  getCurrentPositionAsync,
+  requestForegroundPermissionsAsync,
+} from 'expo-location'
 import { Stack } from 'expo-router'
 import { useEffect, useState } from 'react'
 
@@ -10,6 +15,7 @@ export default function LayoutHome() {
   const { isConnected } = useConnection()
   const { services, loadServices, fetchServices, syncServices } = useServices()
   const { user, token } = useAuth()
+  const { updateCurrentLocation } = useLocationStore()
 
   const [needToUpdate, setNeedToUpdate] = useState(true)
 
@@ -20,6 +26,22 @@ export default function LayoutHome() {
         .catch((err) => reject(err))
     })
   }
+
+  async function requestLocationPermissions() {
+    const { granted } = await requestForegroundPermissionsAsync()
+
+    if (granted) {
+      const currentPosition = await getCurrentPositionAsync()
+      updateCurrentLocation(currentPosition)
+    }
+  }
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      requestLocationPermissions()
+    }, 15000)
+    return () => clearInterval(interval)
+  }, [])
 
   useEffect(() => {
     if (!services && !needToUpdate && user) {
@@ -55,6 +77,14 @@ export default function LayoutHome() {
       <Stack.Screen
         name="travels/[travelId]/index"
         options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="travels/[travelId]/(tabs)/checklist/index"
+        options={{ header: Header }}
+      />
+      <Stack.Screen
+        name="travels/[travelId]/(tabs)/actions/index"
+        options={{ header: Header }}
       />
     </Stack>
   )

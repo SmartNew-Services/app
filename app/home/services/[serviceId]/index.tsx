@@ -9,10 +9,7 @@ import { ServiceType } from '@/src/types/Service'
 import { TravelType } from '@/src/types/Travel'
 import { calculateDistance } from '@/src/utils/calculateDistance'
 import { zodResolver } from '@hookform/resolvers/zod'
-import {
-  getCurrentPositionAsync,
-  requestForegroundPermissionsAsync,
-} from 'expo-location'
+
 import { useLocalSearchParams } from 'expo-router'
 import { CheckCheck, Info, Plus, XCircle } from 'lucide-react-native'
 import { useEffect, useState } from 'react'
@@ -42,7 +39,7 @@ export default function ServiceScreen() {
     resolver: zodResolver(createTravelSchema),
   })
   const { handleSubmit } = createTravelForm
-  const { currentLocation, updateCurrentLocation } = useLocationStore()
+  const { currentLocation } = useLocationStore()
 
   function handleSelectTab(tab: string) {
     setActiveTab(tab)
@@ -90,22 +87,6 @@ export default function ServiceScreen() {
 
     console.log(created)
   }
-
-  async function requestLocationPermissions() {
-    const { granted } = await requestForegroundPermissionsAsync()
-
-    if (granted) {
-      const currentPosition = await getCurrentPositionAsync()
-      updateCurrentLocation(currentPosition)
-    }
-  }
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      requestLocationPermissions()
-    }, 15000)
-    return () => clearInterval(interval)
-  }, [])
 
   useEffect(() => {
     const found = services?.find((item) => item.id === Number(serviceId))

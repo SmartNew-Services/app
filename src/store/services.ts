@@ -153,6 +153,8 @@ export const useServices = create<UseServicesData>((set, get) => {
               newTravels.push(item)
             }
           })
+          updatedService.travels = newTravels
+          newServices.push(updatedService)
         } else {
           newServices.push(service)
         }
